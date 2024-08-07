@@ -1,0 +1,6 @@
+<page-header title="个人设置" />
+<div nz-row nzJustify="center" nzAlign="middle">
+  <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="8" nzXXl="6">
+    <sf #sf mode="edit" [schema]="schema" [ui]="ui" [formData]="i" [button]="button" (formSubmit)="save(sf.value)" (formReset)="reset()" />
+  </div>
+</div>
