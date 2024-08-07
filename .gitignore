@@ -6,6 +6,13 @@
 /out-tsc
 /bazel-out
 
+# 忽略Node版本锁定文件
+/yarn.lock
+/package-lock.json
+
+# 忽略后端地址配置文件
+/src/assets/config/api.json
+
 # Node
 /node_modules
 npm-debug.log
