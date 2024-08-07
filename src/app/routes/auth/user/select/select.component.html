@@ -1,0 +1,5 @@
+@if (loading) {
+  <nz-spin nzSimple nzSize="large" class="modal-spin" />
+} @else {
+  <nz-transfer #tc [nzDataSource]="tranData" [nzTitles]="['未授权用户', '已授权用户']" [nzListStyle]="style" (nzChange)="change($event)" />
+}

@@ -1,0 +1,10 @@
+<page-header title="重置密码" />
+<div nz-row>
+  <div nz-col nzOffset="8" nzSpan="8">
+    <sf #sf mode="edit" [schema]="schema" [ui]="ui" (formChange)="change($event)" button="none" />
+  </div>
+</div>
+<footer-toolbar>
+  <button nz-button [routerLink]="backUrl">返回</button>
+  <button nz-button (click)="save()">保存</button>
+</footer-toolbar>

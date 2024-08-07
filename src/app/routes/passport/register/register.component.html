@@ -70,43 +70,6 @@
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-control [nzErrorTip]="mobileErrorTip">
-      <nz-input-group nzSize="large" [nzAddOnBefore]="addOnBeforeTemplate">
-        <ng-template #addOnBeforeTemplate>
-          <nz-select formControlName="mobilePrefix" style="width: 100px">
-            <nz-option [nzLabel]="'+86'" [nzValue]="'+86'" />
-            <nz-option [nzLabel]="'+87'" [nzValue]="'+87'" />
-          </nz-select>
-        </ng-template>
-        <input formControlName="mobile" nz-input placeholder="Phone number" />
-      </nz-input-group>
-      <ng-template #mobileErrorTip let-i>
-        @if (i.errors?.required) {
-          请输入手机号！
-        }
-        @if (i.errors?.pattern) {
-          手机号格式错误！
-        }
-      </ng-template>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-control [nzErrorTip]="'请输入验证码！'">
-      <div nz-row [nzGutter]="8">
-        <div nz-col [nzSpan]="16">
-          <nz-input-group nzSize="large" nzAddonBeforeIcon="mail">
-            <input nz-input formControlName="captcha" placeholder="Captcha" />
-          </nz-input-group>
-        </div>
-        <div nz-col [nzSpan]="8">
-          <button type="button" nz-button nzSize="large" (click)="getCaptcha()" [disabled]="count > 0" nzBlock [nzLoading]="loading">
-            {{ count ? count + 's' : '获取验证码' }}
-          </button>
-        </div>
-      </div>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
     <button nz-button nzType="primary" nzSize="large" type="submit" [nzLoading]="loading" class="submit"> 注册 </button>
     <a class="login" routerLink="/passport/login">使用已有账户登录</a>
   </nz-form-item>
