@@ -1,0 +1,18 @@
+<nz-table [nzData]="data" [nzFrontPagination]="false" [nzShowPagination]="false">
+  <thead>
+    <tr>
+      @for (item of titles; track $index) {
+        <th>{{ item }}</th>
+      }
+    </tr>
+  </thead>
+  <tbody cdkDropList (cdkDropListDropped)="drop($event)">
+    @for (item of data; track $index) {
+      <tr cdkDrag>
+        @for (field of fields; track $index) {
+          <td>{{ item[field] }}</td>
+        }
+      </tr>
+    }
+  </tbody>
+</nz-table>

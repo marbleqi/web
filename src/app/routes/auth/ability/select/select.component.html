@@ -1,0 +1,33 @@
+@if (loading) {
+  <nz-spin nzSimple nzSize="large" class="modal-spin" />
+} @else {
+  <nz-transfer
+    [nzDataSource]="tranData"
+    [nzTitles]="['未授权权限点', '授权权限点']"
+    [nzRenderList]="[leftRenderList, rightRenderList]"
+    (nzSelectChange)="select($event)"
+    (nzChange)="change($event)"
+  >
+    <ng-template #leftRenderList let-items>
+      @if (leftCheckedData.length > 0) {
+        已选权限点：
+      }
+      @for (item of tagData; track $index) {
+        <nz-tag nzMode="closeable" (nzOnClose)="close(item.id)">{{ item.name }}</nz-tag>
+      }
+      <nz-tree
+        #tree
+        [nzData]="treeData"
+        nzExpandAll
+        nzBlockNode
+        nzCheckable
+        nzCheckStrictly
+        nzVirtualHeight="400px"
+        (nzCheckBoxChange)="treeCheckBoxChange($event)"
+      />
+    </ng-template>
+    <ng-template #rightRenderList>
+      <st [data]="stData" [columns]="columns" [page]="{ show: false }" [scroll]="{ y: '400px' }" (change)="stChange($event)" />
+    </ng-template>
+  </nz-transfer>
+}

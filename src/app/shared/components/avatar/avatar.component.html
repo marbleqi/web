@@ -1,0 +1,18 @@
+<div nz-row>
+  <div nz-col nzSpan="16">
+    <input
+      type="text"
+      nz-input
+      nz-popover
+      [(ngModel)]="url"
+      (ngModelChange)="nzChange.emit($event)"
+      style="width: 100%"
+      nzPopoverContent="头像的URL地址"
+    />
+  </div>
+</div>
+<div nz-row>
+  <div nz-col>
+    <img nz-image width="400px" height="400px" [nzSrc]="url" />
+  </div>
+</div>

@@ -2,8 +2,8 @@ import { Routes } from '@angular/router';
 import { startPageGuard } from '@core';
 import { authSimpleCanActivate, authSimpleCanActivateChild } from '@delon/auth';
 
+import { DashboardComponent, IconComponent } from '.';
 import { LayoutBasicComponent } from '../layout';
-import { DashboardComponent } from './dashboard/dashboard.component';
 
 export const routes: Routes = [
   {
@@ -14,7 +14,9 @@ export const routes: Routes = [
     data: {},
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'dashboard', component: DashboardComponent }
+      { path: 'dashboard', component: DashboardComponent, data: { reuse: false } },
+      { path: 'icon', component: IconComponent, data: { reuse: false } },
+      { path: 'auth', loadChildren: () => import('./auth/routes').then(m => m.routes) }
     ]
   },
   // passport

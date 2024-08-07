@@ -1,0 +1,14 @@
+<page-header title="图标清单" />
+<nz-tabset nzType="card" [nzSelectedIndex]="index">
+  @for (tab of tabs; track $index) {
+    <nz-tab [nzTitle]="tab.title">
+      <nz-radio-group nzSize="large" nzButtonStyle="solid">
+        @for (item of iconMap.get(tab.type); track $index) {
+          <label nz-radio-button [nzValue]="item" nz-tooltip [nzTooltipTitle]="item">
+            <span nz-icon [nzType]="item" nzTheme="outline"></span>
+          </label>
+        }
+      </nz-radio-group>
+    </nz-tab>
+  }
+</nz-tabset>

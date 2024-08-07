@@ -1,1 +1,19 @@
-<page-header />
+<page-header title="控制台" />
+<div nz-row [nzGutter]="8">
+  <div nz-col nzXs="24" nzSm="12" nzMd="8" nzLg="8" nzXl="6" nzXXl="4">
+    <nz-card nzTitle="访问控制">
+      <div>
+        <a routerLink="/auth/ability">权限点</a>
+      </div>
+      <div>
+        <a routerLink="/auth/role">角色</a>
+      </div>
+      <div>
+        <a routerLink="/auth/user">用户</a>
+      </div>
+      <div>
+        <a routerLink="/auth/token">令牌</a>
+      </div>
+    </nz-card>
+  </div>
+</div>

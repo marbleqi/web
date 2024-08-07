@@ -1,4 +1,4 @@
-<layout-default [options]="options" [asideUser]="asideUser" [content]="content" [customError]="null">
+<layout-default [options]="options" [content]="content" [customError]="null">
   <layout-default-header-item direction="left" hidden="mobile">
     <a layout-default-header-item-trigger routerLink="/passport/lock">
       <i nz-icon nzType="lock"></i>
@@ -22,24 +22,8 @@
   <layout-default-header-item direction="right">
     <header-user />
   </layout-default-header-item>
-  <ng-template #asideUser>
-    <div nz-dropdown nzTrigger="click" [nzDropdownMenu]="userMenu" class="alain-default__aside-user">
-      <nz-avatar class="alain-default__aside-user-avatar" [nzSrc]="user.avatar" />
-      <div class="alain-default__aside-user-info">
-        <strong>{{ user.name }}</strong>
-        <p class="mb0">{{ user.email }}</p>
-      </div>
-    </div>
-    <nz-dropdown-menu #userMenu="nzDropdownMenu">
-      <ul nz-menu>
-        <li nz-menu-item routerLink="/pro/account/center">个人中心</li>
-        <li nz-menu-item routerLink="/pro/account/settings">个人设置</li>
-      </ul>
-    </nz-dropdown-menu>
-  </ng-template>
   <ng-template #content>
     <nz-water-mark [nzContent]="mark">
-      <reuse-tab #reuseTab tabType="card" />
       <router-outlet />
     </nz-water-mark>
   </ng-template>

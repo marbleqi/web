@@ -42,7 +42,8 @@ import { HeaderUserComponent } from './widgets/user.component';
   ]
 })
 export class LayoutBasicComponent implements OnInit {
-  options: LayoutDefaultOptions = { logoExpanded: `./assets/logo.png`, logoCollapsed: `./assets/logo.png` };
+  hideAside: boolean = true;
+  options: LayoutDefaultOptions = { logoExpanded: `./assets/logo.png`, logoCollapsed: `./assets/logo.png`, hideAside: true };
 
   searchToggleStatus = false;
   showSettingDrawer = !environment.production;
@@ -56,7 +57,16 @@ export class LayoutBasicComponent implements OnInit {
     private readonly arraySrv: ArrayService,
     private readonly settingSrv: SettingsService,
     private readonly menuSrv: MenuService
-  ) {}
+  ) {
+    this.settingSrv.notify.subscribe(res => {
+      if (res.type === 'layout' && res.name === 'hideAside') {
+        if (this.hideAside !== res.value) {
+          this.hideAside = res.value;
+          this.options = { ...this.options, hideAside: this.hideAside };
+        }
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.mark = [this.settingSrv.user.name || '姓名', this.settingSrv.user.email || '邮箱'];

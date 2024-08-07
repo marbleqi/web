@@ -1,0 +1,13 @@
+<page-header />
+<sf mode="search" [schema]="schema" [ui]="ui" [formData]="i" button="none" />
+<st [data]="data" [columns]="columns" [header]="header" [loading]="loading">
+  <ng-template #header>
+    <div nz-row [nzGutter]="[16, 24]">
+      <div nz-col nzSpan="8" nzOffset="16" class="text-right">
+        <button nz-button nzType="text" (click)="reload()">
+          <span nz-icon nzType="reload" nzTheme="outline"></span>
+        </button>
+      </div>
+    </div>
+  </ng-template>
+</st>

@@ -49,8 +49,8 @@ export class UserLoginComponent implements OnDestroy {
   private readonly cdr = inject(ChangeDetectorRef);
 
   form = inject(FormBuilder).nonNullable.group({
-    userName: ['admin', [Validators.required, Validators.pattern(/^(admin|user)$/)]],
-    password: ['ng-alain.com', [Validators.required, Validators.pattern(/^(ng\-alain\.com)$/)]],
+    userName: ['root', [Validators.required]],
+    password: ['root', [Validators.required]],
     mobile: ['', [Validators.required, Validators.pattern(/^1\d{10}$/)]],
     captcha: ['', [Validators.required]],
     remember: [true]
@@ -110,11 +110,10 @@ export class UserLoginComponent implements OnDestroy {
     this.cdr.detectChanges();
     this.http
       .post(
-        '/login/account',
+        'passport/login',
         {
-          type: this.type,
-          userName: this.form.value.userName,
-          password: this.form.value.password
+          loginName: this.form.value.userName,
+          loginPsw: this.form.value.password
         },
         null,
         {
@@ -127,26 +126,35 @@ export class UserLoginComponent implements OnDestroy {
           this.cdr.detectChanges();
         })
       )
-      .subscribe(res => {
-        if (res.msg !== 'ok') {
-          this.error = res.msg;
-          this.cdr.detectChanges();
-          return;
-        }
-        // 清空路由复用信息
-        this.reuseTabService?.clear();
-        // 设置用户Token信息
-        // TODO: Mock expired value
-        res.user.expired = +new Date() + 1000 * 60 * 5;
-        this.tokenService.set(res.user);
-        // 重新获取 StartupService 内容，我们始终认为应用信息一般都会受当前用户授权范围而影响
-        this.startupSrv.load().subscribe(() => {
-          let url = this.tokenService.referrer!.url || '/';
-          if (url.includes('/passport')) {
-            url = '/';
+      .subscribe({
+        next: res => {
+          console.log('登陆成功', res);
+          // 清空路由复用信息
+          if (this.reuseTabService) {
+            this.reuseTabService.clear();
           }
-          this.router.navigateByUrl(url);
-        });
+          // 设置用户Token信息
+          // TODO: Mock expired value
+          // res.user.expired = +new Date() + 1000 * 60 * 5;
+          this.tokenService.set(res);
+          // 重新获取 StartupService 内容，我们始终认为应用信息一般都会受当前用户授权范围而影响
+          this.startupSrv.load().subscribe(() => {
+            let url = this.tokenService.referrer!.url || '/';
+            if (url.includes('/passport')) {
+              url = '/';
+            }
+            console.debug('重定向地址', url);
+            this.router.navigateByUrl(url);
+          });
+        },
+        error: err => {
+          console.log('登陆失败', err);
+          this.error = err.error.message;
+          this.loading = false;
+        },
+        complete: () => {
+          console.log('提交最后执行A');
+        }
       });
   }
 
