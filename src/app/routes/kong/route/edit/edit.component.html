@@ -1,0 +1,11 @@
+<page-header [title]="title" />
+@if (loading) {
+  <nz-spin nzSimple nzSize="large" class="modal-spin" />
+} @else {
+  <sf #sf mode="edit" [schema]="schema" [ui]="ui" [formData]="i" button="none" (formChange)="value = $event" />
+}
+<footer-toolbar>
+  <button nz-button [routerLink]="baseUrl">返回</button>
+  <button nz-button (click)="reload()">重置</button>
+  <button nz-button nzType="primary" (click)="save()">{{ buttonName }}</button>
+</footer-toolbar>

@@ -1,0 +1,29 @@
+<sf-item-wrap [id]="id" [schema]="schema" [ui]="ui" [showError]="showError" [error]="error" [showTitle]="schema.title">
+  @for (item of data; track $index) {
+    <div nz-row [nzGutter]="[16, 24]">
+      <div nz-col nzSpan="18">
+        <input nz-input [ngModel]="item" (ngModelChange)="change($index, $event)" />
+      </div>
+      <div nz-col nzSpan="6">
+        @if (data.length < max) {
+          <button nz-button nz-popover nzType="text" nzPopoverContent="插入记录" (click)="insert($index)">
+            <span nz-icon nzType="plus" nzTheme="outline"></span>
+          </button>
+          <button nz-button nz-popover nzType="text" nzPopoverContent="克隆记录" (click)="copy($index)">
+            <span nz-icon nzType="insert-row-above" nzTheme="outline"></span>
+          </button>
+        }
+        @if (data.length > min) {
+          <button nz-button nz-popover nzType="text" nzPopoverContent="删除记录" (click)="distory($index)">
+            <span nz-icon nzType="delete-row" nzTheme="outline"></span>
+          </button>
+        }
+      </div>
+    </div>
+  }
+  <div nz-row [nzGutter]="[16, 24]">
+    <div nz-col>
+      <button nz-button nzType="dashed" [disabled]="data.length >= max" (click)="add()">新建</button>
+    </div>
+  </div>
+</sf-item-wrap>

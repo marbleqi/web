@@ -1,0 +1,11 @@
+<nz-tabset nzType="card" [nzSelectedIndex]="index">
+  @for (tab of tabs; track $index) {
+    <nz-tab [nzTitle]="tab.title">
+      <nz-radio-group nzSize="large" nzButtonStyle="solid" [ngModel]="plugin" (ngModelChange)="change.emit($event)">
+        @for (item of pluginMap.get(tab.type); track $index) {
+          <label nz-radio-button [nzValue]="item">{{ item }}</label>
+        }
+      </nz-radio-group>
+    </nz-tab>
+  }
+</nz-tabset>

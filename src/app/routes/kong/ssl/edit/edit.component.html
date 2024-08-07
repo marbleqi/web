@@ -1,0 +1,17 @@
+<page-header [title]="title" />
+@if (loading) {
+  <nz-spin nzSimple nzSize="large" class="modal-spin" />
+} @else {
+  <sf #sf mode="edit" [schema]="schema" [ui]="ui" [formData]="i" button="none">
+    <ng-template sf-template="snis" let-i let-ui="ui" let-schema="schema">
+      @for (sni of i.value; track $index) {
+        <nz-tag nzColor="blue">{{ sni }}</nz-tag>
+      }
+    </ng-template>
+  </sf>
+}
+<footer-toolbar>
+  <button nz-button [routerLink]="baseUrl">返回</button>
+  <button nz-button (click)="reload()">重置</button>
+  <button nz-button nzType="primary" (click)="save()">{{ buttonName }}</button>
+</footer-toolbar>

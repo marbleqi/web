@@ -1,0 +1,35 @@
+<page-header [title]="title" />
+@if (loading) {
+  <nz-spin nzSimple nzSize="large" class="modal-spin" />
+} @else {
+  <sf #sf mode="edit" [schema]="schema" [ui]="ui" [formData]="i" button="none">
+    <ng-template sf-template="name" let-i let-ui="ui" let-schema="schema">
+      <app-kong-plugin-select [instance]="instance" [plugin]="i.value" (change)="plugin = $event" />
+    </ng-template>
+  </sf>
+  @switch (plugin) {
+    @case ('cors') {
+      <app-kong-plugin-cors [config]="i.config" (change)="config = $event" />
+    }
+    @case ('http-log') {
+      <app-kong-plugin-http-log />
+    }
+    @case ('http301https') {
+      无需特殊配置
+    }
+    @case ('redirect') {
+      <app-kong-plugin-redirect />
+    }
+    @case ('response-transformer') {
+      <app-kong-plugin-response-transformer />
+    }
+    @default {
+      该插件编辑功能尚未开发
+    }
+  }
+}
+<footer-toolbar>
+  <button nz-button [routerLink]="baseUrl">返回</button>
+  <button nz-button (click)="reload()">重置</button>
+  <button nz-button nzType="primary" (click)="save()">{{ buttonName }}</button>
+</footer-toolbar>
