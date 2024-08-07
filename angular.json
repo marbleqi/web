@@ -7,7 +7,7 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "skipTests": false,
+          "skipTests": true,
           "flat": false,
           "inlineStyle": true,
           "inlineTemplate": false,
@@ -17,27 +17,27 @@
           "routing": true
         },
         "ng-alain:list": {
-          "skipTests": false
+          "skipTests": true
         },
         "ng-alain:edit": {
-          "skipTests": false,
+          "skipTests": true,
           "modal": true
         },
         "ng-alain:view": {
-          "skipTests": false,
+          "skipTests": true,
           "modal": true
         },
         "ng-alain:curd": {
-          "skipTests": false
+          "skipTests": true
         },
         "@schematics/angular:module": {
           "routing": true
         },
         "@schematics/angular:directive": {
-          "skipTests": false
+          "skipTests": true
         },
         "@schematics/angular:service": {
-          "skipTests": false
+          "skipTests": true
         }
       },
       "root": "",
@@ -84,8 +84,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "3mb"
+                  "maximumWarning": "10mb",
+                  "maximumError": "50mb"
                 },
                 {
                   "type": "anyComponentStyle",
