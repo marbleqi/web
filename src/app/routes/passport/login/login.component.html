@@ -45,7 +45,7 @@
             </nz-col>
             <nz-col [nzSpan]="8">
               <button type="button" nz-button nzSize="large" (click)="getCaptcha()" [disabled]="count >= 0" nzBlock [nzLoading]="loading">
-                {{ count ? count + 's' : ('获取验证码') }}
+                {{ count ? count + 's' : '获取验证码' }}
               </button>
             </nz-col>
           </nz-row>
@@ -62,15 +62,9 @@
     </nz-col>
   </nz-form-item>
   <nz-form-item>
-    <button nz-button type="submit" nzType="primary" nzSize="large" [nzLoading]="loading" nzBlock>
-      登录
-    </button>
+    <button nz-button type="submit" nzType="primary" nzSize="large" [nzLoading]="loading" nzBlock> 登录 </button>
   </nz-form-item>
 </form>
 <div class="other">
-  其他登录方式
-  <i nz-tooltip nzTooltipTitle="in fact Auth0 via window" (click)="open('auth0', 'window')" nz-icon nzType="alipay-circle" class="icon"></i>
-  <i nz-tooltip nzTooltipTitle="in fact Github via redirect" (click)="open('github')" nz-icon nzType="taobao-circle" class="icon"></i>
-  <i (click)="open('weibo', 'window')" nz-icon nzType="weibo-circle" class="icon"></i>
   <a class="register" routerLink="/passport/register">注册账户</a>
 </div>

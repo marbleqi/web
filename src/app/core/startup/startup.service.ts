@@ -1,11 +1,11 @@
+import { HttpClient } from '@angular/common/http';
 import { APP_INITIALIZER, Injectable, Provider, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { ACLService } from '@delon/acl';
 import { DA_SERVICE_TOKEN } from '@delon/auth';
 import { ALAIN_I18N_TOKEN, MenuService, SettingsService, TitleService } from '@delon/theme';
-import { ACLService } from '@delon/acl';
-import { Observable, zip, of, catchError, map } from 'rxjs';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { Observable, zip, of, catchError, map } from 'rxjs';
 
 /**
  * Used for application startup
@@ -55,13 +55,10 @@ export class StartupService {
     this.titleService.suffix = res.app?.name;
   }
 
-  
   private viaHttp(): Observable<void> {
     return this.appData$.pipe(map((res: NzSafeAny) => this.handleAppData(res)));
   }
-  
 
-  
   private viaMock(): Observable<void> {
     // const tokenData = this.tokenService.get();
     // if (!tokenData.token) {

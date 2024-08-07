@@ -1,0 +1,29 @@
+name: 制作镜像并推送到私有仓库
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 拉取代码
+        uses: actions/checkout@v4
+      - name: 安装Node运行环境
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+      - name: 登陆阿里云镜像仓库
+        run: |
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} registry.cn-wulanchabu.aliyuncs.com
+      - name: 制作镜像并推送镜像仓库
+        run: |
+          yarn
+          yarn run lint
+          VERSION=$(jq -r '.version' package.json)
+          echo "项目版本号: $VERSION"
+          yarn run build
+          docker build -t registry.cn-wulanchabu.aliyuncs.com/marbleqi/web:$VERSION .
+          docker push registry.cn-wulanchabu.aliyuncs.com/marbleqi/web:$VERSION

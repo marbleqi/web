@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="wrap">
+    <div class="top">
+      <div class="head">
+        <img class="logo" src="./assets/logo.png" />
+        <span class="title">{{ name }}</span>
+      </div>
+      <div class="desc">{{ description }}</div>
+    </div>
+    <router-outlet />
+    <global-footer>
+      <p>{{ company }}</p>
+      <p>
+        <span nz-icon nzType="copyright"></span>{{ domain }}ICP备案号：<a href="https://beian.miit.gov.cn/" target="_blank">{{ icp }}</a>
+      </p>
+    </global-footer>
+  </div>
+</div>
